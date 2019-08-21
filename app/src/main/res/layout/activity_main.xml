@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select a  Start Date"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:layout_marginTop="70dp"
         android:id="@+id/startDate"
         android:layout_centerHorizontal="true"
@@ -20,8 +20,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select a  Start Date"
-        android:textSize="30dp"
+        android:text="Select an End Date"
+        android:textSize="30sp"
         android:layout_marginTop="170dp"
         android:id="@+id/endDate"
         android:layout_centerHorizontal="true"
@@ -30,10 +30,19 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:layout_marginTop="350dp"
         android:id="@+id/resultDate"
         android:layout_centerHorizontal="true"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calculate"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/button"
+        android:onClick="calculate"
+        android:layout_marginTop="500dp"/>
 
 </RelativeLayout>

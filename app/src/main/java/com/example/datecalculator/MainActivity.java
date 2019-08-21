@@ -117,6 +117,6 @@ public class MainActivity extends AppCompatActivity
         long b = scal.getTimeInMillis();
         long diff = a-b;
         //long diff = ecal.getTimeInMillis() - scal.getTimeInMillis();
-        reDate.setText("Days: " + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+        reDate.setText("Days: " + (TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)));
     }
 }
