@@ -12,6 +12,7 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity
     private TextView reDate;
     int endate,enyear,enmonth;
     int stdate,styear,stmonth;
+    Calendar ecal = Calendar.getInstance();
+    Calendar scal = Calendar.getInstance();
 
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private DatePickerDialog.OnDateSetListener edateSetListener;
@@ -40,16 +43,16 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Calendar cal = Calendar.getInstance();
-                int syear = cal.get(Calendar.YEAR);
-                int smonth = cal.get(Calendar.MONTH);
-                int sday = cal.get(Calendar.DAY_OF_MONTH);
+                int syear = scal.get(Calendar.YEAR);
+                int smonth = scal.get(Calendar.MONTH);
+                int sday = scal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dialog = new DatePickerDialog
                         (MainActivity.this,
                                 android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                                 dateSetListener,
                                 syear,smonth,sday);
+
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
@@ -62,9 +65,9 @@ public class MainActivity extends AppCompatActivity
                 month++;
                 String stdt = day + "/" + month + "/" + year;
                 stDate.setText(stdt);
-                styear = year;
-                stmonth = month;
-                stdate = day;
+                scal.set(Calendar.YEAR,year);
+                scal.set(Calendar.MONTH,month);
+                scal.set(Calendar.DAY_OF_MONTH,day);
             }
         };
 
@@ -76,10 +79,9 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Calendar cal = Calendar.getInstance();
-                int eyear = cal.get(Calendar.YEAR);
-                int emonth = cal.get(Calendar.MONTH);
-                int eday = cal.get(Calendar.DAY_OF_MONTH);
+                int eyear = ecal.get(Calendar.YEAR);
+                int emonth = ecal.get(Calendar.MONTH);
+                int eday = ecal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dialog = new DatePickerDialog
                         (MainActivity.this,
@@ -88,6 +90,9 @@ public class MainActivity extends AppCompatActivity
                                 eyear,emonth,eday);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
+                ecal.set(Calendar.YEAR,eyear);
+                ecal.set(Calendar.MONTH,emonth);
+                ecal.set(Calendar.DAY_OF_MONTH,eday);
             }
         });
 
@@ -98,10 +103,20 @@ public class MainActivity extends AppCompatActivity
                 month++;
                 String stdt = day + "/" + month + "/" + year;
                 enDate.setText(stdt);
-                endate = day;
-                enmonth = month;
-                enyear = year;
+                ecal.set(Calendar.YEAR,year);
+                ecal.set(Calendar.MONTH,month);
+                ecal.set(Calendar.DAY_OF_MONTH,day);
             }
         };
+
+    }
+
+    public void calculate(View view)
+    {
+        long a = ecal.getTimeInMillis();
+        long b = scal.getTimeInMillis();
+        long diff = a-b;
+        //long diff = ecal.getTimeInMillis() - scal.getTimeInMillis();
+        reDate.setText("Days: " + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
     }
 }
