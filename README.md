@@ -23,4 +23,4 @@ An app to find the difference of two given dates
 
 <hr>
 
-:squirrel:
+:squirrel: :octocat:
